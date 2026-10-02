@@ -1,0 +1,16 @@
+{
+  "name": "biological-signal-station",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun bun.config.dev.js",
+    "build": "bun bun.config.prod.js"
+  },
+  "dependencies": {
+    "tone": "15.1.22"
+  },
+  "engines": {
+    "bun": ">=1.3.0"
+  }
+}

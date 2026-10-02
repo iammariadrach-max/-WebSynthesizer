@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biological Signal Station — Лента памяти</title>
+    <link rel="stylesheet" href="./layout.css" />
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>BIOLOGICAL SIGNAL STATION</h1>
+      <p>Прототип станции биологической связи.</p>
+
+      <section aria-label="Воспроизведение">
+        <button type="button" id="playButton">PLAY</button>
+        <button type="button" id="stopButton" disabled>STOP</button>
+        <p id="status" role="status">
+          Остановлено. Нажмите PLAY, чтобы включить звук.
+        </p>
+        <p id="error" role="alert" hidden></p>
+      </section>
+
+      <section aria-label="Темп">
+        <label for="bpm"
+          >Пульс / BPM: <output id="bpmValue" for="bpm">100</output></label
+        >
+        <input id="bpm" type="range" min="60" max="160" step="1" value="100" />
+      </section>
+
+      <section aria-labelledby="tapeTitle">
+        <h2 id="tapeTitle">MEMORY TAPE / Лента памяти</h2>
+        <p id="stepHelp">Клик по шагу: EMPTY → LOW → HIGH → NOISE → EMPTY.</p>
+        <div id="sequencer" aria-describedby="stepHelp">
+          <button type="button" class="step" data-step="0">01 LOW</button>
+          <button type="button" class="step" data-step="1">02 EMPTY</button>
+          <button type="button" class="step" data-step="2">03 NOISE</button>
+          <button type="button" class="step" data-step="3">04 HIGH</button>
+          <button type="button" class="step" data-step="4">05 LOW</button>
+          <button type="button" class="step" data-step="5">06 EMPTY</button>
+          <button type="button" class="step" data-step="6">07 NOISE</button>
+          <button type="button" class="step" data-step="7">08 HIGH</button>
+        </div>
+        <p id="currentStep">Текущий шаг: —</p>
+        <p>Один шаг — восьмая нота. Восемь шагов повторяются по кругу.</p>
+      </section>
+
+      <section aria-labelledby="controlsTitle">
+        <h2 id="controlsTitle">Параметры сигнала</h2>
+        <div class="control">
+          <label for="clarity"
+            >Чёткость / Clarity:
+            <output id="clarityValue" for="clarity">6000 Hz</output></label
+          >
+          <input
+            id="clarity"
+            type="range"
+            min="400"
+            max="12000"
+            step="100"
+            value="6000"
+          />
+          <small
+            >Частота среза lowpass-фильтра: от приглушённого к яркому
+            звуку.</small
+          >
+        </div>
+        <div class="control">
+          <label for="interference"
+            >Помехи / Interference:
+            <output id="interferenceValue" for="interference">0%</output></label
+          >
+          <input
+            id="interference"
+            type="range"
+            min="0"
+            max="100"
+            step="1"
+            value="0"
+          />
+          <small>Тихий непрерывный шум. При 0 помех нет.</small>
+        </div>
+        <div class="control">
+          <label for="trace"
+            >След / Trace:
+            <output id="traceValue" for="trace">20%</output></label
+          >
+          <input
+            id="trace"
+            type="range"
+            min="0"
+            max="100"
+            step="1"
+            value="20"
+          />
+          <small>Количество эха и длина хвоста. При 0 сигнал сухой.</small>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
