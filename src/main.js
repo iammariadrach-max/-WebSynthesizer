@@ -1,6 +1,5 @@
 import {
   pattern,
-  melodyNotes,
   settings,
   changeParameter,
   play,
@@ -11,13 +10,10 @@ import {
 } from './audio.js'
 
 const currentStep = document.getElementById('currentStep')
-const currentMelodyNote = document.getElementById('currentMelodyNote')
 const stepButtons = [...document.querySelectorAll('.step')]
 const states = ['EMPTY', 'LOW', 'HIGH', 'NOISE']
 
 let activeStep = -1
-
-document.getElementById('melodyNotes').textContent = melodyNotes.join(' → ')
 
 function renderSteps() {
   stepButtons.forEach((button, index) => {
@@ -43,13 +39,6 @@ function renderSteps() {
 function showStep(index) {
   activeStep = index
   renderSteps()
-}
-
-function showMelodyNote(index) {
-  currentMelodyNote.textContent =
-    index < 0
-      ? 'Текущая нота: —'
-      : `Текущая нота: ${melodyNotes[index]} (${index + 1} / ${melodyNotes.length})`
 }
 
 stepButtons.forEach((button, index) => {
@@ -154,9 +143,9 @@ const stopMelodyPlayback = setupTransport({
   errorId: 'melodyError',
   play: playMelody,
   stop: stopMelody,
-  onStep: showMelodyNote,
   playingMessage: 'Голос экосистемы. Мелодия воспроизводится по кругу.',
-  stoppedMessage: 'Мелодия остановлена. Следующий PLAY начнёт с ноты C4.'
+  stoppedMessage:
+    'Мелодия остановлена. Следующий PLAY начнёт композицию сначала.'
 })
 
 window.addEventListener('pagehide', () => {
@@ -166,4 +155,3 @@ window.addEventListener('pagehide', () => {
 })
 
 renderSteps()
-showMelodyNote(-1)
