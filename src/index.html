@@ -15,7 +15,7 @@
       <h1>BIOLOGICAL SIGNAL STATION</h1>
 
       <section aria-label="Воспроизведение ленты памяти">
-        <h2>Голос 1 / Лента памяти</h2>
+        <h2>Лента памяти</h2>
 
         <button type="button" id="playButton">PLAY ЛЕНТА</button>
 
@@ -30,7 +30,7 @@
 
       <section aria-label="Общий темп двух голосов">
         <label for="bpm">
-          Пульс / BPM:
+          Пульс:
           <output id="bpmValue" for="bpm">100</output>
         </label>
 
@@ -38,7 +38,7 @@
       </section>
 
       <section aria-labelledby="tapeTitle">
-        <h2 id="tapeTitle">MEMORY TAPE / Лента памяти</h2>
+        <h2 id="tapeTitle">MEMORY TAPE</h2>
 
         <p id="stepHelp">Клик по шагу: EMPTY → LOW → HIGH → NOISE → EMPTY.</p>
 
@@ -61,16 +61,10 @@
         </div>
 
         <p id="currentStep">Текущий шаг: —</p>
-
-        <p>Один шаг — восьмая нота. Восемь шагов повторяются по кругу.</p>
       </section>
 
       <section aria-labelledby="melodyTitle">
-        <h2 id="melodyTitle">Голос 2 / Голос экосистемы</h2>
-
-        <p>
-          Медленная ambient-мелодия с мягким вступлением и длинным затуханием.
-        </p>
+        <h2 id="melodyTitle">Голос экосистемы</h2>
 
         <button type="button" id="melodyPlayButton">PLAY МЕЛОДИЯ</button>
 
@@ -106,7 +100,7 @@
 
         <div class="control">
           <label for="clarity">
-            Чёткость / Clarity:
+            Чёткость:
             <output id="clarityValue" for="clarity">6000 Hz</output>
           </label>
 
@@ -126,7 +120,7 @@
 
         <div class="control">
           <label for="interference">
-            Помехи / Interference:
+            Помехи:
             <output id="interferenceValue" for="interference"> 0% </output>
           </label>
 

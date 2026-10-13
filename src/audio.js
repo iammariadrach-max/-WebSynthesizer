@@ -11,11 +11,7 @@ export const pattern = [
   'HIGH'
 ]
 
-// «Ночной сигнал»: 32 такта, четыре раздела по 8 тактов.
-// В каждой строке — один такт.
-// Формат ноты: [доля внутри такта, нота, длительность в долях].
 const melodyBars = [
-  // 1–8: появление темы, много воздуха.
   [
     [0, 'C4', 1.5],
     [2.5, 'E4', 1]
@@ -51,7 +47,6 @@ const melodyBars = [
     [2, 'C4', 1.5]
   ],
 
-  // 9–16: ответ на тему, новые окончания и синкопы.
   [
     [0, 'E4', 1],
     [1.5, 'G4', 0.75],
@@ -89,7 +84,6 @@ const melodyBars = [
     [2, 'G4', 1.5]
   ],
 
-  // 17–24: раскрытие — выше регистр, плотнее фразы.
   [
     [0, 'C5', 1],
     [1.5, 'D5', 0.5],
@@ -131,7 +125,6 @@ const melodyBars = [
     [3, 'G4', 0.75]
   ],
 
-  // 25–32: возвращение знакомого мотива и мягкое завершение.
   [
     [0, 'E4', 1.5],
     [2.5, 'G4', 1]
@@ -168,7 +161,6 @@ const melodyBars = [
   ]
 ]
 
-// Четырёхголосные аккорды меняются раз в два такта.
 const chordChanges = [
   [0, ['C3', 'G3', 'B3', 'E4']],
   [2, ['A2', 'G3', 'B3', 'E4']],
@@ -188,7 +180,6 @@ const chordChanges = [
   [30, ['C3', 'G3', 'B3', 'D4']]
 ]
 
-// Редкие верхние ноты — тихий ответ основной мелодии.
 const answers = [
   [3, 2.5, 'E5'],
   [7, 2.5, 'D5'],
@@ -222,7 +213,6 @@ const leadEvents = melodyBars
   )
   .map((event, index) => ({ ...event, index }))
 
-// Существующий main.js продолжает показывать ноты.
 export const melodyNotes = leadEvents.map((event) => event.note)
 
 const musicEvents = [
@@ -363,7 +353,6 @@ function initAudio() {
 
   musicInput = new Tone.Gain(1)
 
-  // Два чередующихся голоса сохраняют хвост предыдущей ноты.
   leadSynths = Array.from({ length: 2 }, () =>
     new Tone.Synth({
       volume: -16,
@@ -383,7 +372,6 @@ function initAudio() {
     }).connect(musicInput)
   )
 
-  // Четыре мягких голоса для аккордовой подложки.
   padSynths = Array.from({ length: 4 }, () =>
     new Tone.Synth({
       volume: -25,
@@ -571,8 +559,6 @@ async function startTrack(name, onStep) {
     initAudio()
 
     if (name === 'melody') {
-      // Reverb подготавливается асинхронно.
-      // STOP может отменить ожидание.
       await createMusicReverb()
 
       if (currentRequest !== track.requestId) return false
@@ -582,8 +568,6 @@ async function startTrack(name, onStep) {
 
     const time = Tone.now() + 0.02
 
-    // Подключаем голос на ближайшей восьмой
-    // общей ритмической сетки.
     const stepTicks = transport.PPQ / 2
 
     const position = transportRunning
@@ -616,8 +600,6 @@ async function startTrack(name, onStep) {
     if (currentRequest === track.requestId) {
       stopTrack(name)
 
-      // При ошибке инициализации не оставляем
-      // частично созданную цепочку.
       if (!sequence || !compositionPart) {
         disposeAudio()
       }
@@ -670,8 +652,6 @@ function stopTrack(name) {
     synth.triggerRelease(time)
   }
 
-  // Очищаем пространство мелодии,
-  // не затрагивая играющую ленту.
   if (name === 'melody' && musicReverb) {
     musicInput.disconnect(musicReverb)
     musicReverb.dispose()
